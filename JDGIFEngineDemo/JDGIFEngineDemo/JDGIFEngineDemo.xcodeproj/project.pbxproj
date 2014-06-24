@@ -1,0 +1,512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1E2961D1959C48C00FE5736 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E2961C1959C48C00FE5736 /* Foundation.framework */; };
+		A1E2961F1959C48C00FE5736 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E2961E1959C48C00FE5736 /* CoreGraphics.framework */; };
+		A1E296211959C48C00FE5736 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E296201959C48C00FE5736 /* UIKit.framework */; };
+		A1E296271959C48C00FE5736 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1E296251959C48C00FE5736 /* InfoPlist.strings */; };
+		A1E296291959C48C00FE5736 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E296281959C48C00FE5736 /* main.m */; };
+		A1E2962D1959C48C00FE5736 /* JDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E2962C1959C48C00FE5736 /* JDAppDelegate.m */; };
+		A1E296301959C48C00FE5736 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1E2962E1959C48C00FE5736 /* Main.storyboard */; };
+		A1E296331959C48C00FE5736 /* JDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E296321959C48C00FE5736 /* JDViewController.m */; };
+		A1E296351959C48C00FE5736 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E296341959C48C00FE5736 /* Images.xcassets */; };
+		A1E2963C1959C48C00FE5736 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E2963B1959C48C00FE5736 /* XCTest.framework */; };
+		A1E2963D1959C48C00FE5736 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E2961C1959C48C00FE5736 /* Foundation.framework */; };
+		A1E2963E1959C48C00FE5736 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1E296201959C48C00FE5736 /* UIKit.framework */; };
+		A1E296461959C48C00FE5736 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1E296441959C48C00FE5736 /* InfoPlist.strings */; };
+		A1E296481959C48C00FE5736 /* JDGIFEngineDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E296471959C48C00FE5736 /* JDGIFEngineDemoTests.m */; };
+		A1E296541959C4D700FE5736 /* JDGIFEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E296531959C4D700FE5736 /* JDGIFEngine.m */; };
+		A1E2965B1959CCD600FE5736 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = A1E2965A1959CCD600FE5736 /* UIImage+animatedGIF.m */; };
+		A1E2965D1959D09A00FE5736 /* Miguel_Herrera.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A1E2965C1959D09A00FE5736 /* Miguel_Herrera.mp4 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A1E2963F1959C48C00FE5736 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1E296111959C48C00FE5736 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1E296181959C48C00FE5736;
+			remoteInfo = JDGIFEngineDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A1E296191959C48C00FE5736 /* JDGIFEngineDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JDGIFEngineDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1E2961C1959C48C00FE5736 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A1E2961E1959C48C00FE5736 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A1E296201959C48C00FE5736 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A1E296241959C48C00FE5736 /* JDGIFEngineDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JDGIFEngineDemo-Info.plist"; sourceTree = "<group>"; };
+		A1E296261959C48C00FE5736 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A1E296281959C48C00FE5736 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A1E2962A1959C48C00FE5736 /* JDGIFEngineDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JDGIFEngineDemo-Prefix.pch"; sourceTree = "<group>"; };
+		A1E2962B1959C48C00FE5736 /* JDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JDAppDelegate.h; sourceTree = "<group>"; };
+		A1E2962C1959C48C00FE5736 /* JDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JDAppDelegate.m; sourceTree = "<group>"; };
+		A1E2962F1959C48C00FE5736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A1E296311959C48C00FE5736 /* JDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JDViewController.h; sourceTree = "<group>"; };
+		A1E296321959C48C00FE5736 /* JDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JDViewController.m; sourceTree = "<group>"; };
+		A1E296341959C48C00FE5736 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A1E2963A1959C48C00FE5736 /* JDGIFEngineDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JDGIFEngineDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1E2963B1959C48C00FE5736 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A1E296431959C48C00FE5736 /* JDGIFEngineDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JDGIFEngineDemoTests-Info.plist"; sourceTree = "<group>"; };
+		A1E296451959C48C00FE5736 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A1E296471959C48C00FE5736 /* JDGIFEngineDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JDGIFEngineDemoTests.m; sourceTree = "<group>"; };
+		A1E296521959C4D700FE5736 /* JDGIFEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JDGIFEngine.h; path = ../../JDGIFEngine/JDGIFEngine.h; sourceTree = "<group>"; };
+		A1E296531959C4D700FE5736 /* JDGIFEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JDGIFEngine.m; path = ../../JDGIFEngine/JDGIFEngine.m; sourceTree = "<group>"; };
+		A1E296591959CCD600FE5736 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+animatedGIF.h"; path = "Categories/UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		A1E2965A1959CCD600FE5736 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+animatedGIF.m"; path = "Categories/UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		A1E2965C1959D09A00FE5736 /* Miguel_Herrera.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Miguel_Herrera.mp4; path = Videos/Miguel_Herrera.mp4; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1E296161959C48C00FE5736 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E2961F1959C48C00FE5736 /* CoreGraphics.framework in Frameworks */,
+				A1E296211959C48C00FE5736 /* UIKit.framework in Frameworks */,
+				A1E2961D1959C48C00FE5736 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1E296371959C48C00FE5736 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E2963C1959C48C00FE5736 /* XCTest.framework in Frameworks */,
+				A1E2963E1959C48C00FE5736 /* UIKit.framework in Frameworks */,
+				A1E2963D1959C48C00FE5736 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1E296101959C48C00FE5736 = {
+			isa = PBXGroup;
+			children = (
+				A1E296511959C4BB00FE5736 /* JDGIFEngine */,
+				A1E296221959C48C00FE5736 /* JDGIFEngineDemo */,
+				A1E296411959C48C00FE5736 /* JDGIFEngineDemoTests */,
+				A1E2961B1959C48C00FE5736 /* Frameworks */,
+				A1E2961A1959C48C00FE5736 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1E2961A1959C48C00FE5736 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1E296191959C48C00FE5736 /* JDGIFEngineDemo.app */,
+				A1E2963A1959C48C00FE5736 /* JDGIFEngineDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1E2961B1959C48C00FE5736 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1E2961C1959C48C00FE5736 /* Foundation.framework */,
+				A1E2961E1959C48C00FE5736 /* CoreGraphics.framework */,
+				A1E296201959C48C00FE5736 /* UIKit.framework */,
+				A1E2963B1959C48C00FE5736 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A1E296221959C48C00FE5736 /* JDGIFEngineDemo */ = {
+			isa = PBXGroup;
+			children = (
+				A1E296581959CCCA00FE5736 /* Categories */,
+				A1E296551959CC2900FE5736 /* Videos */,
+				A1E2962B1959C48C00FE5736 /* JDAppDelegate.h */,
+				A1E2962C1959C48C00FE5736 /* JDAppDelegate.m */,
+				A1E2962E1959C48C00FE5736 /* Main.storyboard */,
+				A1E296311959C48C00FE5736 /* JDViewController.h */,
+				A1E296321959C48C00FE5736 /* JDViewController.m */,
+				A1E296341959C48C00FE5736 /* Images.xcassets */,
+				A1E296231959C48C00FE5736 /* Supporting Files */,
+			);
+			path = JDGIFEngineDemo;
+			sourceTree = "<group>";
+		};
+		A1E296231959C48C00FE5736 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A1E296241959C48C00FE5736 /* JDGIFEngineDemo-Info.plist */,
+				A1E296251959C48C00FE5736 /* InfoPlist.strings */,
+				A1E296281959C48C00FE5736 /* main.m */,
+				A1E2962A1959C48C00FE5736 /* JDGIFEngineDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A1E296411959C48C00FE5736 /* JDGIFEngineDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				A1E296471959C48C00FE5736 /* JDGIFEngineDemoTests.m */,
+				A1E296421959C48C00FE5736 /* Supporting Files */,
+			);
+			path = JDGIFEngineDemoTests;
+			sourceTree = "<group>";
+		};
+		A1E296421959C48C00FE5736 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A1E296431959C48C00FE5736 /* JDGIFEngineDemoTests-Info.plist */,
+				A1E296441959C48C00FE5736 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A1E296511959C4BB00FE5736 /* JDGIFEngine */ = {
+			isa = PBXGroup;
+			children = (
+				A1E296521959C4D700FE5736 /* JDGIFEngine.h */,
+				A1E296531959C4D700FE5736 /* JDGIFEngine.m */,
+			);
+			name = JDGIFEngine;
+			sourceTree = "<group>";
+		};
+		A1E296551959CC2900FE5736 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				A1E2965C1959D09A00FE5736 /* Miguel_Herrera.mp4 */,
+			);
+			name = Videos;
+			sourceTree = "<group>";
+		};
+		A1E296581959CCCA00FE5736 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				A1E296591959CCD600FE5736 /* UIImage+animatedGIF.h */,
+				A1E2965A1959CCD600FE5736 /* UIImage+animatedGIF.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1E296181959C48C00FE5736 /* JDGIFEngineDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1E2964B1959C48C00FE5736 /* Build configuration list for PBXNativeTarget "JDGIFEngineDemo" */;
+			buildPhases = (
+				A1E296151959C48C00FE5736 /* Sources */,
+				A1E296161959C48C00FE5736 /* Frameworks */,
+				A1E296171959C48C00FE5736 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JDGIFEngineDemo;
+			productName = JDGIFEngineDemo;
+			productReference = A1E296191959C48C00FE5736 /* JDGIFEngineDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A1E296391959C48C00FE5736 /* JDGIFEngineDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1E2964E1959C48C00FE5736 /* Build configuration list for PBXNativeTarget "JDGIFEngineDemoTests" */;
+			buildPhases = (
+				A1E296361959C48C00FE5736 /* Sources */,
+				A1E296371959C48C00FE5736 /* Frameworks */,
+				A1E296381959C48C00FE5736 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1E296401959C48C00FE5736 /* PBXTargetDependency */,
+			);
+			name = JDGIFEngineDemoTests;
+			productName = JDGIFEngineDemoTests;
+			productReference = A1E2963A1959C48C00FE5736 /* JDGIFEngineDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1E296111959C48C00FE5736 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JD;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "___FULLUSERNAME___";
+				TargetAttributes = {
+					A1E296391959C48C00FE5736 = {
+						TestTargetID = A1E296181959C48C00FE5736;
+					};
+				};
+			};
+			buildConfigurationList = A1E296141959C48C00FE5736 /* Build configuration list for PBXProject "JDGIFEngineDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1E296101959C48C00FE5736;
+			productRefGroup = A1E2961A1959C48C00FE5736 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1E296181959C48C00FE5736 /* JDGIFEngineDemo */,
+				A1E296391959C48C00FE5736 /* JDGIFEngineDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1E296171959C48C00FE5736 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E2965D1959D09A00FE5736 /* Miguel_Herrera.mp4 in Resources */,
+				A1E296351959C48C00FE5736 /* Images.xcassets in Resources */,
+				A1E296271959C48C00FE5736 /* InfoPlist.strings in Resources */,
+				A1E296301959C48C00FE5736 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1E296381959C48C00FE5736 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E296461959C48C00FE5736 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1E296151959C48C00FE5736 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E2962D1959C48C00FE5736 /* JDAppDelegate.m in Sources */,
+				A1E296331959C48C00FE5736 /* JDViewController.m in Sources */,
+				A1E296541959C4D700FE5736 /* JDGIFEngine.m in Sources */,
+				A1E2965B1959CCD600FE5736 /* UIImage+animatedGIF.m in Sources */,
+				A1E296291959C48C00FE5736 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1E296361959C48C00FE5736 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1E296481959C48C00FE5736 /* JDGIFEngineDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A1E296401959C48C00FE5736 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1E296181959C48C00FE5736 /* JDGIFEngineDemo */;
+			targetProxy = A1E2963F1959C48C00FE5736 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A1E296251959C48C00FE5736 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1E296261959C48C00FE5736 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A1E2962E1959C48C00FE5736 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1E2962F1959C48C00FE5736 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A1E296441959C48C00FE5736 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A1E296451959C48C00FE5736 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A1E296491959C48C00FE5736 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A1E2964A1959C48C00FE5736 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A1E2964C1959C48C00FE5736 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JDGIFEngineDemo/JDGIFEngineDemo-Prefix.pch";
+				INFOPLIST_FILE = "JDGIFEngineDemo/JDGIFEngineDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A1E2964D1959C48C00FE5736 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JDGIFEngineDemo/JDGIFEngineDemo-Prefix.pch";
+				INFOPLIST_FILE = "JDGIFEngineDemo/JDGIFEngineDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A1E2964F1959C48C00FE5736 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JDGIFEngineDemo.app/JDGIFEngineDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JDGIFEngineDemo/JDGIFEngineDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "JDGIFEngineDemoTests/JDGIFEngineDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A1E296501959C48C00FE5736 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/JDGIFEngineDemo.app/JDGIFEngineDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JDGIFEngineDemo/JDGIFEngineDemo-Prefix.pch";
+				INFOPLIST_FILE = "JDGIFEngineDemoTests/JDGIFEngineDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1E296141959C48C00FE5736 /* Build configuration list for PBXProject "JDGIFEngineDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1E296491959C48C00FE5736 /* Debug */,
+				A1E2964A1959C48C00FE5736 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1E2964B1959C48C00FE5736 /* Build configuration list for PBXNativeTarget "JDGIFEngineDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1E2964C1959C48C00FE5736 /* Debug */,
+				A1E2964D1959C48C00FE5736 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A1E2964E1959C48C00FE5736 /* Build configuration list for PBXNativeTarget "JDGIFEngineDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1E2964F1959C48C00FE5736 /* Debug */,
+				A1E296501959C48C00FE5736 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1E296111959C48C00FE5736 /* Project object */;
+}
