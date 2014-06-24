@@ -35,16 +35,9 @@
     NSTimeInterval videoDuration = CMTimeGetSeconds([videoAsset duration]);
     NSMutableArray *frames = [NSMutableArray new];
     [self generateFramesForVideoAsset:videoAsset startTime:startTime endTime:endTime frameOutput:^(UIImage *snapshotImage) {
-        //NSLog(@"snapshotImage: %@ (scale: %f)",NSStringFromCGSize(snapshotImage.size), snapshotImage.scale);
         [frames addObject:snapshotImage];
     } completion:^{
         [self generateGIFWithFrames:frames duration:videoDuration completion:^(NSURL *gifURL) {
-            
-            NSError *error;
-            NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[gifURL relativePath] error:&error];
-            NSString *kbString = [NSByteCountFormatter stringFromByteCount:[fileAttributes fileSize] countStyle:NSByteCountFormatterCountStyleBinary];
-            NSLog(@"gifURL: %@ [%@]", gifURL, kbString);
-            
             completion(gifURL);
         }];
     }];
@@ -61,12 +54,6 @@
         NSTimeInterval videoDuration = normalizedEndTime - startTime;
         NSInteger snapshotCount = ceil(videoDuration * self.framesPerSecond);
         
-        
-        //CGSize naturalSize = [[[asset tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] naturalSize];
-        //CGFloat scaleFactor = kSPGIFEngineWidth / naturalSize.width;
-        //CGSize snapshotSize = CGSizeMake(naturalSize.width * scaleFactor, naturalSize.height * scaleFactor);
-        
-        //NSLog(@"naturalSize: %@  snapshotSize: %@  scaleFactor: %f", NSStringFromCGSize(naturalSize), NSStringFromCGSize(snapshotSize), scaleFactor);
         NSMutableArray *times = [NSMutableArray array];
         for (NSInteger snapshotIndex = 0; snapshotIndex < snapshotCount; snapshotIndex++) {
             CMTime time = CMTimeMakeWithSeconds(((videoDuration / snapshotCount) * snapshotIndex) + startTime, 1000);
@@ -79,7 +66,6 @@
         
         AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:asset];
         
-        //imageGenerator.maximumSize = snapshotSize;
         imageGenerator.maximumSize = self.maximumSize;
         
         imageGenerator.appliesPreferredTrackTransform = YES;
@@ -115,30 +101,21 @@
 }
 
 - (void)generateGIFWithFrames:(NSArray*)frames duration:(NSTimeInterval)duration completion:(void (^)(NSURL *gifURL))completion {
-    
-    //We'll need a property dictionary to specify the number of times the animation should repeat:
-    //kCGImagePropertyGIFLoopCount = 0 = loop forever
     NSDictionary *fileProperties = @{(__bridge id)kCGImagePropertyGIFDictionary :
                                          @{(__bridge id)kCGImagePropertyGIFLoopCount: @0, }
                                      };
     
-    //And we'll need another property dictionary, which we'll attach to each frame, specifying how long that frame should be displayed:
-    //kCGImagePropertyGIFDelayTime= a float (not double!) in seconds, rounded to centiseconds in the GIF data
-    //.02 is min for browsers
-    #warning  I dont think this is right
-    CGFloat frameDuration = (100.0f / self.framesPerSecond) / 100.0f;
+    CGFloat frameDuration = duration / [frames count];
     NSDictionary *frameProperties = @{(__bridge id)kCGImagePropertyGIFDictionary :
                                           @{(__bridge id)kCGImagePropertyGIFDelayTime : @(frameDuration)}
                                       };
-    //We'll also create a URL for the GIF in our documents directory:
+    
     NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
     NSURL *gifURL = [documentsDirectoryURL URLByAppendingPathComponent:@"output.gif"];
     
-    //Now we can create a CGImageDestination that writes a GIF to the specified URL:
     CGImageDestinationRef destination = CGImageDestinationCreateWithURL((__bridge CFURLRef)gifURL, kUTTypeGIF, [frames count], NULL);
     CGImageDestinationSetProperties(destination, (__bridge CFDictionaryRef)fileProperties);
     
-    //write frames
     for (UIImage *frame in frames) {
         @autoreleasepool {
             CGImageDestinationAddImage(destination, frame.CGImage, (__bridge CFDictionaryRef)frameProperties);
