@@ -14,6 +14,7 @@
 @interface JDViewController ()
 @property (nonatomic, weak) IBOutlet UIImageView *gifImageView;
 @property (nonatomic, strong) JDGIFEngine *gifEngine;
+@property (nonatomic, strong) JDGIFEngineOperation *gifOperation;
 @end
 
 @implementation JDViewController
@@ -27,10 +28,16 @@
 - (IBAction)generateGIF:(id)sender {
     self.gifImageView.image = nil;
     NSURL *videoPath = [[NSBundle mainBundle] URLForResource:@"Miguel_Herrera" withExtension:@"mp4"];
-    [self.gifEngine generateGIFForVideoPath:videoPath startTime:0.0f endTime:MAXFLOAT completion:^(NSURL *gifURL) {
+    self.gifOperation = [self.gifEngine operationWithVideoURL:videoPath cropStartTime:0 cropEndTime:MAXFLOAT overlayImage:nil previewImage:^(UIImage *previewImage) {
+        NSLog(@"previewImage: %@", previewImage);
+        self.gifImageView.image = previewImage;
+    } completion:^(NSURL *gifURL) {
+        NSLog(@"gifURL: %@", gifURL);
         UIImage *gifImage = [UIImage animatedImageWithAnimatedGIFURL:gifURL];
         self.gifImageView.image = gifImage;
     }];
+    [self.gifEngine addOperationToQueue:self.gifOperation];
+
 }
 
 @end

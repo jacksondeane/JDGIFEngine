@@ -7,13 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+@class JDGIFEngineOperation;
 
 @interface JDGIFEngine : NSObject
 
-@property (nonatomic, assign) CGFloat framesPerSecond;
-@property (nonatomic, assign) CGSize maximumSize;
+- (JDGIFEngineOperation*)operationWithVideoURL:(NSURL*)videoURL cropStartTime:(NSTimeInterval)cropStartTime cropEndTime:(NSTimeInterval)cropEndTime overlayImage:(UIImage*)overlayImage previewImage:(void (^)(UIImage *previewImage))previewImage completion:(void (^)(NSURL *gifURL))completion;
+- (void)addOperationToQueue:(JDGIFEngineOperation*)operation;
+- (void)cancelAllOperations;
 
-- (void)generateGIFForVideoPath:(NSURL*)videoPath completion:(void (^)(NSURL *gifURL))completion;
-- (void)generateGIFForVideoPath:(NSURL*)videoPath startTime:(NSTimeInterval)startTime endTime:(NSTimeInterval)endTime completion:(void (^)(NSURL *gifURL))completion;
+@end
+
+
+typedef void(^previewImage)(UIImage*);
+typedef void(^completion)(NSURL*);
+
+@interface JDGIFEngineOperation : NSBlockOperation
+@property (copy) previewImage previewImageBlock;
+@property (copy) completion completionBlock;
 
 @end
