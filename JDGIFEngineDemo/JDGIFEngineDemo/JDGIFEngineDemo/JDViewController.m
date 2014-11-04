@@ -25,10 +25,19 @@
     self.gifEngine = [[JDGIFEngine alloc] init];
 }
 
-- (IBAction)generateGIF:(id)sender {
+
+#pragma mark Actions
+
+- (IBAction)generateGIFFromVideo:(id)sender {
+    
+    
+    
+    JDGIFEngine *gifEngine = [JDGIFEngine new];
+    JDGIFEngineOperation *operation;
+    
     self.gifImageView.image = nil;
     NSURL *videoPath = [[NSBundle mainBundle] URLForResource:@"Miguel_Herrera" withExtension:@"mp4"];
-    self.gifOperation = [self.gifEngine operationWithVideoURL:videoPath cropStartTime:0 cropEndTime:MAXFLOAT overlayImage:nil previewImage:^(UIImage *previewImage) {
+    operation = [gifEngine operationWithVideoURL:videoPath cropStartTime:0 cropEndTime:MAXFLOAT overlayImage:nil previewImage:^(UIImage *previewImage) {
         NSLog(@"previewImage: %@", previewImage);
         self.gifImageView.image = previewImage;
     } completion:^(NSURL *gifURL) {
@@ -36,8 +45,35 @@
         UIImage *gifImage = [UIImage animatedImageWithAnimatedGIFURL:gifURL];
         self.gifImageView.image = gifImage;
     }];
-    [self.gifEngine addOperationToQueue:self.gifOperation];
+    [gifEngine addOperationToQueue:operation];
 
 }
+
+- (IBAction)generateGIFFromImages:(id)sender {
+    
+    JDGIFEngine *gifEngine = [JDGIFEngine new];
+    JDGIFEngineOperation *operation;
+    
+    self.gifImageView.image = nil;
+    
+    
+    NSMutableArray *frames = [NSMutableArray new];
+    for (int i = 1; i <= 10; i++) {
+        NSString *imagePath = [NSString stringWithFormat:@"img%d.jpg", i];
+        [frames addObject:[UIImage imageNamed:imagePath]];
+    }
+    
+    operation = [gifEngine operationWithFrames:frames frameDuration:.5 previewImage:^(UIImage *previewImage) {
+        NSLog(@"previewImage: %@", previewImage);
+        self.gifImageView.image = previewImage;
+    } completion:^(NSURL *gifURL) {
+        NSLog(@"gifURL: %@", gifURL);
+        UIImage *gifImage = [UIImage animatedImageWithAnimatedGIFURL:gifURL];
+        self.gifImageView.image = gifImage;
+    }];
+    [gifEngine addOperationToQueue:operation];
+    
+}
+
 
 @end

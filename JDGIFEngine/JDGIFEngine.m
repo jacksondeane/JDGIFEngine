@@ -127,6 +127,64 @@ static NSUInteger const kFramesPerSecond = 10;
     return operation;
 }
 
+- (JDGIFEngineOperation*)operationWithFrames:(NSArray*)frames frameDuration:(NSTimeInterval)frameDuration previewImage:(void (^)(UIImage *previewImage))previewImage completion:(void (^)(NSURL *gifURL))completion {
+    __block JDGIFEngineOperation *operation = [JDGIFEngineOperation blockOperationWithBlock:^{
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            operation.previewImageBlock([frames firstObject]); //Preview hardcoded to 1st frame
+        }];
+        
+        
+        if (![operation isCancelled]) {
+            //CGFloat frameDuration = (100.0f / kFramesPerSecond) / 100.0f;
+            NSDictionary *frameProperties = @{(__bridge id)kCGImagePropertyGIFDictionary : @{(__bridge id)kCGImagePropertyGIFDelayTime : @(frameDuration)}};
+            
+            NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
+            NSURL *gifURL = [documentsDirectoryURL URLByAppendingPathComponent:@"output.gif"];
+            
+            CGImageDestinationRef destination = CGImageDestinationCreateWithURL((__bridge CFURLRef)gifURL, kUTTypeGIF, [frames count], NULL);
+            
+            BOOL sentPreview = NO;
+            for (__strong UIImage *frame in frames) {
+                frame = [JDGIFEngine scaleAndCropImage:frame resolution:320/384 maxSize:CGSizeMake(320, 384)];
+                
+                if (!sentPreview) {
+                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                        operation.previewImageBlock(frame);
+                    }];
+                    sentPreview = YES;
+                }
+                
+                @autoreleasepool {
+                    CGImageDestinationAddImage(destination, frame.CGImage, (__bridge CFDictionaryRef)frameProperties);
+                }
+            }
+            
+            NSDictionary *fileProperties = @{(__bridge id)kCGImagePropertyGIFDictionary : @{(__bridge id)kCGImagePropertyGIFLoopCount: @0,}};
+            CGImageDestinationSetProperties(destination, (__bridge CFDictionaryRef)fileProperties);
+            if (!CGImageDestinationFinalize(destination)) {
+                NSLog(@"failed to finalize image destination");
+            }
+            CFRelease(destination);
+            
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                operation.finishedBlock(gifURL);
+            }];
+            
+        } else {
+            NSLog(@"operation canceled: %@", operation);
+            return;
+        }
+        
+    }];
+    
+    operation.previewImageBlock = previewImage;
+    operation.finishedBlock = completion;
+    
+    return operation;
+
+    }
+
 - (void)addOperationToQueue:(JDGIFEngineOperation*)operation {
     [self.operationQueue addOperation:operation];
 }
