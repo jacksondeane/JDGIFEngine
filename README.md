@@ -12,5 +12,5 @@ operation = [gifEngine operationWithVideoURL:videoPath cropStartTime:0 cropEndTi
     NSLog(@"gifURL: %@", gifURL);
 }];
 
-[gifEngine addOperationToQueue:gifOperation];
+[gifEngine addOperationToQueue:operation];
 ```
