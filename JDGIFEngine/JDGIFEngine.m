@@ -41,9 +41,9 @@ static NSUInteger const kFramesPerSecond = 10;
         AVAsset *videoAsset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
         NSTimeInterval startTime = cropStartTime;
         NSTimeInterval endTime = cropEndTime;
+        NSTimeInterval duration = CMTimeGetSeconds([videoAsset duration]);
         
-        //Set up Image Generator
-        NSTimeInterval normalizedEndTime = MIN(endTime, CMTimeGetSeconds([videoAsset duration]));
+        NSTimeInterval normalizedEndTime = MIN(endTime, duration);
         NSTimeInterval cropDuration = normalizedEndTime - startTime;
         NSInteger snapshotCount = ceil(cropDuration * kFramesPerSecond);
         CGSize snapshotSize = CGSizeMake(480.0f, 640.0f);
@@ -55,37 +55,25 @@ static NSUInteger const kFramesPerSecond = 10;
         imageGenerator.requestedTimeToleranceBefore = kCMTimeZero;
         imageGenerator.requestedTimeToleranceAfter = kCMTimeZero;
         
-        
-        //Set up GIF Creation; kCGImagePropertyGIFLoopCount = 0 = loop forever
-        NSDictionary *fileProperties = @{(__bridge id)kCGImagePropertyGIFDictionary : @{(__bridge id)kCGImagePropertyGIFLoopCount: @0,}};
-        
-        CGFloat frameDuration = (100.0f / kFramesPerSecond) / 100.0f;
-        NSDictionary *frameProperties = @{(__bridge id)kCGImagePropertyGIFDictionary : @{(__bridge id)kCGImagePropertyGIFDelayTime : @(frameDuration)}};
-        
-        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-        NSURL *gifURL = [documentsDirectoryURL URLByAppendingPathComponent:@"output.gif"];
-        
-        //Write GIF to the specified URL:
-        CGImageDestinationRef destination = CGImageDestinationCreateWithURL((__bridge CFURLRef)gifURL, kUTTypeGIF, snapshotCount, NULL);
-        CGImageDestinationSetProperties(destination, (__bridge CFDictionaryRef)fileProperties);
-        
+        NSMutableArray *frames = [NSMutableArray new];
         BOOL sentPreview = NO;
         for (NSInteger snapshotIndex = 0; snapshotIndex < snapshotCount; snapshotIndex++) {
             CMTime time = CMTimeMakeWithSeconds(((cropDuration / snapshotCount) * snapshotIndex) + startTime, 1000);
             
             if (![operation isCancelled]) {
                 NSError *error;
-                UIImage *image = [UIImage imageWithCGImage:[imageGenerator copyCGImageAtTime:time actualTime:nil error:&error]];
+                UIImage *image = [UIImage imageWithCGImage:[imageGenerator copyCGImageAtTime:time actualTime:NULL error:&error]];
+                if (error) {
+                    NSLog(@"Error getting image at time %f: %@", CMTimeGetSeconds(time), error);
+                    continue;
+                }
+                
                 image = [JDGIFEngine scaleAndCropImage:image resolution:320/384 maxSize:CGSizeMake(320, 384)];
                 
                 if (overlayImage) {
                     image = [JDGIFEngine imageByCombiningImage:image withImage:overlayImage]; //add overlay
                 }
-                
-                //Add to GIF
-                @autoreleasepool {
-                    CGImageDestinationAddImage(destination, image.CGImage, (__bridge CFDictionaryRef)frameProperties);
-                }
+                [frames addObject:image];
                 
                 if (!sentPreview) {
                     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
@@ -93,26 +81,37 @@ static NSUInteger const kFramesPerSecond = 10;
                     }];
                     sentPreview = YES;
                 }
-                
-                
-                if (snapshotIndex >= snapshotCount) {
-                    break;
-                }
             } else {
                 NSLog(@"operation canceled: %@", operation);
                 return;
             }
         }
         
-        //Make the GIF
+        //MAKE GIF
         if (![operation isCancelled]) {
+            CGFloat frameDuration = (100.0f / kFramesPerSecond) / 100.0f;
+            NSDictionary *frameProperties = @{(__bridge id)kCGImagePropertyGIFDictionary : @{(__bridge id)kCGImagePropertyGIFDelayTime : @(frameDuration)}};
+            
+            NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
+            NSURL *gifURL = [documentsDirectoryURL URLByAppendingPathComponent:@"output.gif"];
+            
+            CGImageDestinationRef destination = CGImageDestinationCreateWithURL((__bridge CFURLRef)gifURL, kUTTypeGIF, [frames count], NULL);
+            
+            for (UIImage *frame in frames) {
+                @autoreleasepool {
+                    CGImageDestinationAddImage(destination, frame.CGImage, (__bridge CFDictionaryRef)frameProperties);
+                }
+            }
+            
+            NSDictionary *fileProperties = @{(__bridge id)kCGImagePropertyGIFDictionary : @{(__bridge id)kCGImagePropertyGIFLoopCount: @0,}};
+            CGImageDestinationSetProperties(destination, (__bridge CFDictionaryRef)fileProperties);
             if (!CGImageDestinationFinalize(destination)) {
                 NSLog(@"failed to finalize image destination");
             }
             CFRelease(destination);
             
             [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                operation.completionBlock(gifURL);
+                operation.finishedBlock(gifURL);
             }];
             
         } else {
@@ -123,7 +122,7 @@ static NSUInteger const kFramesPerSecond = 10;
     }];
     
     operation.previewImageBlock = previewImage;
-    operation.completionBlock = completion;
+    operation.finishedBlock = completion;
     
     return operation;
 }
@@ -140,15 +139,12 @@ static NSUInteger const kFramesPerSecond = 10;
 #pragma mark Private
 
 + (UIImage*)imageByCombiningImage:(UIImage*)firstImage withImage:(UIImage*)secondImage {
-    //NSLog(@"imageByCombiningImage: [%f x %f]  & [%f x %f]", firstImage.size.width, firstImage.size.height, secondImage.size.width, secondImage.size.height);
-    
     UIImage *image;
     
     //hardcoded to respect 1st images size
     CGFloat scale = secondImage.scale * secondImage.size.height / firstImage.size.height;
     secondImage = [UIImage imageWithCGImage:[secondImage CGImage] scale:scale orientation:(secondImage.imageOrientation)];
     
-    //CGSize newImageSize = CGSizeMake(MAX(firstImage.size.width, secondImage.size.width), MAX(firstImage.size.height, secondImage.size.height));
     CGSize newImageSize = firstImage.size; //force 1st image size
     
     if (UIGraphicsBeginImageContextWithOptions != NULL) {
@@ -162,19 +158,18 @@ static NSUInteger const kFramesPerSecond = 10;
                                          roundf((newImageSize.height-secondImage.size.height)/2))];
     image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    //NSLog(@"%f x %f", image.size.width, image.size.height);
+    
     return image;
 }
 
 + (UIImage*)scaleAndCropImage:(UIImage*)image resolution:(CGFloat)resolution maxSize:(CGSize)maxSize {
     
-    //Scale Image
     CGFloat widthScaleFactor = maxSize.width / image.size.width;
     CGFloat heightScaleFactor = maxSize.height / image.size.height;
     CGFloat scaleFactor = (widthScaleFactor > heightScaleFactor) ? widthScaleFactor : heightScaleFactor;
     
     CGSize scaledSize = CGSizeMake(image.size.width * scaleFactor, image.size.height * scaleFactor);
-    
+
     UIGraphicsBeginImageContext(scaledSize);
     [image drawInRect:CGRectMake(0, 0, scaledSize.width, scaledSize.height)];
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -192,16 +187,18 @@ static NSUInteger const kFramesPerSecond = 10;
     CGImageRef croppedImageRef = CGImageCreateWithImageInRect(scaledImage.CGImage, cropRect);
     UIImage *newImage = [UIImage imageWithCGImage:croppedImageRef scale:image.scale orientation:image.imageOrientation];
     
-    //Cleanup
     CGImageRelease(croppedImageRef);
     
-    //NSLog(@"scaleAndCropImage: sourceImage:%@ newImage.size:%@", NSStringFromCGSize(image.size), NSStringFromCGSize(newImage.size));
     
     return newImage;
 }
 
+
 @end
 
+
+@interface JDGIFEngineOperation ()
+@end
 
 @implementation JDGIFEngineOperation
 

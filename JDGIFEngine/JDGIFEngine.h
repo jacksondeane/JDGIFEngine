@@ -19,10 +19,9 @@
 
 
 typedef void(^previewImage)(UIImage*);
-typedef void(^completion)(NSURL*);
+typedef void(^finished)(NSURL*);
 
 @interface JDGIFEngineOperation : NSBlockOperation
 @property (copy) previewImage previewImageBlock;
-@property (copy) completion completionBlock;
-
+@property (copy) finished finishedBlock;
 @end
