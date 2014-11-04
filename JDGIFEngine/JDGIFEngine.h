@@ -12,6 +12,7 @@
 @interface JDGIFEngine : NSObject
 
 - (JDGIFEngineOperation*)operationWithVideoURL:(NSURL*)videoURL cropStartTime:(NSTimeInterval)cropStartTime cropEndTime:(NSTimeInterval)cropEndTime overlayImage:(UIImage*)overlayImage previewImage:(void (^)(UIImage *previewImage))previewImage completion:(void (^)(NSURL *gifURL))completion;
+- (JDGIFEngineOperation*)operationWithFrames:(NSArray*)frames frameDuration:(NSTimeInterval)frameDuration previewImage:(void (^)(UIImage *previewImage))previewImage completion:(void (^)(NSURL *gifURL))completion;
 - (void)addOperationToQueue:(JDGIFEngineOperation*)operation;
 - (void)cancelAllOperations;
 
